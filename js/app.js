@@ -79,7 +79,7 @@ $(document).ready(function(){
 
         $("#details").show()
         $("#details").append(data)
-        // $("#xdet").append(data)
+        // 
 
         //new cart items
         var crt = new Cart(pizza, ptt)
@@ -103,13 +103,24 @@ $(document).ready(function(){
     //prompt delivery
     $("#m-sub").click(function(e) {
         e.preventDefault();
-        $("#myModal").hide();
+        $("#myModal").modal("hide");
+        var address;
         if (confirm("Would you like us deliver your pizza to your doorstep? Transport cost ksh 150.") == true) {
-            text = "You pressed OK!";
+            address = prompt("Enter delivery Address")
+            
           } else {
-            text = "You canceled!";
           }
-        prompt("Enter delivery Address")
+
+        var xcheck = $("#details").html()
+        var ct = $("#c-t").text()
+
+        $("#xdet").append(xcheck)
+        if (address !== null){
+        $("#c-t1").append(ct, " Delivered to: ", address, "at a cost of KSH 150.")
+        } else{
+            $("#c-t1").append(ct)
+        }
+        $("#myModal1").modal();
     });
 });
 
