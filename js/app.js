@@ -1,5 +1,5 @@
 //pizza object
-class pizza {
+class Pizza {
     constructor(size, crust, topping) {
         this.size = size
         this.crust = crust
@@ -46,15 +46,43 @@ var cart = []
 $(document).ready(function(){ 
     $("#bt-sub").click(function(e) {
         e.preventDefault();
+
+        //name
         s = $('#pizza-size').find(":selected").text();
         c = $('#pizza-crust').find(":selected").text();
+
+        //values
+        s1 = $('#pizza-size').val()
+        c1 = $('#pizza-crust').val()
         t = [];
         $("input[type='checkbox']").each(function() {
             if($(this).is(':checked')){
                 t.push($(this).val());
             }
           });
+        // prompt("Enter delivery Address")
+        // alert(s1 + c1 +t)
 
-        alert(s+c+t)
+        var pizza = new Pizza(s1,c1,t)
+
+        //piz size price
+        var t1 = getSizePrice(pizza.size)
+        console.log(t1)
+        //piz crust price
+
+        //piz topping price
     });
 });
+
+
+function getSizePrice(size){
+    if(size == "s"){
+        return 500
+    } else if (size == "m"){
+        return 750
+    } else{
+        return 1200
+    }
+}
+
+
