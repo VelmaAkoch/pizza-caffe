@@ -28,13 +28,27 @@ var cart = []
 
 //handle form submission
 
-$("document").ready(function() {
+// $("document").ready(function() {
 
-    s = $('#pizza-size').val
-    c = $('#pizza-crust').val
-    t = []
+//     // alert("Hey Velma")
 
-    function submitPizza(){
+//     s = $('#pizza-size').find(":selected").text();
+//     c = $('#pizza-crust').find(":selected").text();
+//     t = []
 
-    }
+//     $("bt-sub").click(submitPizza());
+
+//     function submitPizza(){
+//         alert(s,c)
+//     }
+// });
+
+$(document).ready(function(){ 
+    $("#bt-sub").click(function() {
+        s = $('#pizza-size').find(":selected").text();
+        c = $('#pizza-crust').find(":selected").text();
+        t = []
+
+        alert(s+c)
+    });
 });
