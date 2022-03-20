@@ -54,23 +54,28 @@ $(document).ready(function(){
         //values
         s1 = $('#pizza-size').val()
         c1 = $('#pizza-crust').val()
-        t = [];
+        top = [];
         $("input[type='checkbox']").each(function() {
             if($(this).is(':checked')){
-                t.push($(this).val());
+                top.push($(this).val());
             }
           });
         // prompt("Enter delivery Address")
-        // alert(s1 + c1 +t)
+        // alert(s1 + c1 +top)
 
-        var pizza = new Pizza(s1,c1,t)
+        var pizza = new Pizza(s1,c1,top)
 
         //piz size price
         var t1 = getSizePrice(pizza.size)
         console.log(t1)
         //piz crust price
-
+        var t2 = getCrustPrice(pizza.crust)
+        console.log(t2)
         //piz topping price
+
+        //pizza price
+        var ptt = t1 + t2
+        console.log("Pizza price: KSH", ptt)
     });
 });
 
@@ -85,4 +90,14 @@ function getSizePrice(size){
     }
 }
 
+function getCrustPrice(size){
+    if(size == "crispy"){
+        return 250
+    } else if (size == "stuffed"){
+        return 150
+    } else{
+        return 0
+    }
+}
 
+function getToppingPrice(){}
