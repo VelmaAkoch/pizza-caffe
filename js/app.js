@@ -44,8 +44,11 @@ var cart = []
 // });
 
 $(document).ready(function(){ 
+
+    $("#details").hide()
     $("#bt-sub").click(function(e) {
         e.preventDefault();
+        $("#zed").hide()
 
         //name
         s = $('#pizza-size').find(":selected").text();
@@ -54,16 +57,20 @@ $(document).ready(function(){
         //values
         s1 = $('#pizza-size').val()
         c1 = $('#pizza-crust').val()
-        top = [];
+        topping = [];
         $("input[type='checkbox']").each(function() {
             if($(this).is(':checked')){
-                top.push($(this).val());
+                topping.push($(this).val());
             }
           });
         // prompt("Enter delivery Address")
         // alert(s1 + c1 +top)
 
-        var pizza = new Pizza(s1,c1,top)
+        console.log(topping)
+
+        
+
+        var pizza = new Pizza(s1,c1,topping)
 
         //piz size price
         var t1 = getSizePrice(pizza.size)
@@ -72,10 +79,15 @@ $(document).ready(function(){
         var t2 = getCrustPrice(pizza.crust)
         console.log(t2)
         //piz topping price
-
+        var t3 = getToppingPrice(pizza.topping)
         //pizza price
-        var ptt = t1 + t2
+        var ptt = t1 + t2 + t3
         console.log("Pizza price: KSH", ptt)
+
+        var data = `<div><p>Pizza Size: ${s}, Crust: ${c},<br>Topping: ${topping.join()}, Quantity: 1<br>Total: ${ptt}</p> </div>`
+
+        $("#details").show()
+        $("#details").append(data)
     });
 });
 
@@ -100,4 +112,19 @@ function getCrustPrice(size){
     }
 }
 
-function getToppingPrice(){}
+function getToppingPrice(t){
+    var total = 0
+    t.array.forEach(element => {
+        if(element == "pepperoni"){
+            total += 120
+        }
+        if (element == "veges"){
+            total += 70
+        }
+        if (element == "bacon"){
+            total += 150
+        }
+    });
+
+    return total;
+}
