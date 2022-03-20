@@ -44,11 +44,17 @@ var cart = []
 // });
 
 $(document).ready(function(){ 
-    $("#bt-sub").click(function() {
+    $("#bt-sub").click(function(e) {
+        e.preventDefault();
         s = $('#pizza-size').find(":selected").text();
         c = $('#pizza-crust').find(":selected").text();
-        t = []
+        t = [];
+        $("input[type='checkbox']").each(function() {
+            if($(this).is(':checked')){
+                t.push($(this).val());
+            }
+          });
 
-        alert(s+c)
+        alert(s+c+t)
     });
 });
