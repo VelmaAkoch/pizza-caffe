@@ -22,30 +22,21 @@ var crust = {
 }
 
 //cart object
-var cart = []
+class Cart{
+    constructor(pizza, total) {
+        this.pizza = pizza
+        this.total = total
+    }
+}
 
+//global cart array
 
-
-//handle form submission
-
-// $("document").ready(function() {
-
-//     // alert("Hey Velma")
-
-//     s = $('#pizza-size').find(":selected").text();
-//     c = $('#pizza-crust').find(":selected").text();
-//     t = []
-
-//     $("bt-sub").click(submitPizza());
-
-//     function submitPizza(){
-//         alert(s,c)
-//     }
-// });
+var cart_bag = []
 
 $(document).ready(function(){ 
 
     $("#details").hide()
+    $("#l-sub").hide()
     $("#bt-sub").click(function(e) {
         e.preventDefault();
         $("#zed").hide()
@@ -66,7 +57,7 @@ $(document).ready(function(){
         // prompt("Enter delivery Address")
         // alert(s1 + c1 +top)
 
-        console.log(topping)
+        // console.log(topping)
 
         
 
@@ -74,22 +65,42 @@ $(document).ready(function(){
 
         //piz size price
         var t1 = getSizePrice(pizza.size)
-        console.log(t1)
+        // console.log(t1)
         //piz crust price
         var t2 = getCrustPrice(pizza.crust)
-        console.log(t2)
+        // console.log(t2)
         //piz topping price
         var t3 = getToppingPrice(pizza.topping)
         //pizza price
         var ptt = t1 + t2 + t3
-        console.log("Pizza price: KSH", ptt)
+        // console.log("Pizza price: KSH", ptt)
 
         var data = `<div><p>Pizza Size: ${s}, Crust: ${c},<br>Topping: ${topping.join()}, Quantity: 1<br>Total: ${ptt}</p> </div>`
 
         $("#details").show()
         $("#details").append(data)
+
+        //new cart items
+        var crt = new Cart(pizza, ptt)
+
+        //obj cart
+        cart_bag.push(crt)
+        console.log(cart_bag)
+        $("#l-sub").show()
+        var myTotal = cart_bag.map(total).reduce(sum);
+        console.log(myTotal)
     });
 });
+
+//extract total and sum
+
+function total(item){
+    return item.total;
+  }
+
+  function sum(prev, next){
+    return prev + next;
+  }
 
 
 function getSizePrice(size){
@@ -108,13 +119,13 @@ function getCrustPrice(size){
     } else if (size == "stuffed"){
         return 150
     } else{
-        return 0
+        return 100
     }
 }
 
 function getToppingPrice(t){
     var total = 0
-    t.array.forEach(element => {
+    t.forEach(element => {
         if(element == "pepperoni"){
             total += 120
         }
