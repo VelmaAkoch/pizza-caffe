@@ -54,7 +54,7 @@ $(document).ready(function(){
                 topping.push($(this).val());
             }
           });
-        // prompt("Enter delivery Address")
+        // 
         // alert(s1 + c1 +top)
 
         // console.log(topping)
@@ -79,6 +79,7 @@ $(document).ready(function(){
 
         $("#details").show()
         $("#details").append(data)
+        // $("#xdet").append(data)
 
         //new cart items
         var crt = new Cart(pizza, ptt)
@@ -88,7 +89,27 @@ $(document).ready(function(){
         console.log(cart_bag)
         $("#l-sub").show()
         var myTotal = cart_bag.map(total).reduce(sum);
+        $("#c-t").append("Amount you are to pay for your order is ksh ",myTotal)
         console.log(myTotal)
+    });
+
+    //open modal
+    $("#l-sub").click(function(e) {
+        e.preventDefault();
+        $("#myModal").modal();
+        // prompt("Enter delivery Address")
+    });
+
+    //prompt delivery
+    $("#m-sub").click(function(e) {
+        e.preventDefault();
+        $("#myModal").hide();
+        if (confirm("Would you like us deliver your pizza to your doorstep? Transport cost ksh 150.") == true) {
+            text = "You pressed OK!";
+          } else {
+            text = "You canceled!";
+          }
+        prompt("Enter delivery Address")
     });
 });
 
